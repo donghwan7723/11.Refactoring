@@ -65,7 +65,7 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.*, ROWNUM AS row_seq
 	  					FROM		(	SELECT  b.brand_name, prd.prod_no, prd.prod_name, prd.price, prd.reg_date, prd.brand_id,
-	  										   NVL(tra.tran_status_code,'0') tran_status_code
+	  										   NVL(tra.tran_status_code,'0') tran_status_codem, prd.image_file
 									    FROM product prd, transaction tra, brand b
 									    WHERE tra.prod_no(+) = prd.prod_no AND b.brand_id = prd.brand_id
 											<if test="searchCondition != null ">
@@ -82,7 +82,7 @@
 													</if>
 
 											</if>
-									 GROUP BY prd.prod_no, prd.prod_name, prd.price, prd.reg_date, tra.tran_status_code, b.brand_name, prd.brand_id
+									 GROUP BY prd.prod_no, prd.prod_name, prd.price, prd.reg_date, tra.tran_status_code, b.brand_name, prd.brand_id, prd.image_file
 			
 				<if test="sortCondition=='desc'">
 					ORDER BY prd.price DESC

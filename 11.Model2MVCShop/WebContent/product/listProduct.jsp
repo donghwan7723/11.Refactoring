@@ -13,7 +13,15 @@
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript">
+
+
 
 <%--	// 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
 	function fncGetList(currentPage) {
@@ -36,16 +44,16 @@
 				
 				var prodNo = $(this).data("param");	
 				var tranCode = $(this).data("param1");
+				var menu = '${param.menu}';
 				
 				
-				
-				if(${param.menu=='manage'}){
+ 				if(menu=='manage'){
 					self.location = "/product/updateProductView?prodNo="+prodNo+"&menu=manage"
-				}else if(${param.menu=='search'}){
+				}else if(menu=='search'){
 					if(tranCode=='0'){
 						self.location = "/product/getProduct?prodNo="+prodNo+"&menu=search"
 					}
-				}			
+				}		
 			});
 			
 			
@@ -80,10 +88,45 @@
 </script>
 
 </head>
+ <body>
 
-<body bgcolor="#ffffff" text="#000000">
+	<jsp:include page="/layout/toolbar.jsp" />
 
-<div style="width:98%; margin-left:10px;">
+	
+	<div class="container"> 
+
+			<h2>썸네일</h2> 
+
+<%-- 			<c:forEach var="product" items="${list}">
+				<div class="row">
+					<div class="col-xs-6 col-md-3">
+					
+ 						<a href="#" class="thumbnail">
+						<img src="../images/uploadFiles/${product.fileName}"> </a> 
+				
+					</div> 
+				</div>
+	
+ 		</c:forEach>	
+ 		 </div>   --%>
+ 		
+ 		 <c:forEach var="product" items="${list}">
+			<ul class="thumbnails">
+  				<li class="span1">
+ 				   <div class="thumbnail">
+ 				     <img src="../images/uploadFiles/${product.fileName}" class="rounded float-right" width="300" height="300">
+  					</div>  
+  				</li>
+ 				 못타는건 나도알아
+			</ul>
+ 		</c:forEach>	
+ 		 
+ 		 
+ 		 
+ <%-- <body bgcolor="#ffffff" text="#000000">
+
+
+ <div style="width:98%; margin-left:10px;">
 
 <form name="detailForm">
 
@@ -280,11 +323,11 @@
     	</td>
 	</tr>
 	
-</table>
+</table> 
 <!--  페이지 Navigator 끝 -->
 
-</form>
+</form> --%>
 
-</div>
+
 </body>
 </html>

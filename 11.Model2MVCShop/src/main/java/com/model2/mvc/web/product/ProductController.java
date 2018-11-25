@@ -49,14 +49,17 @@ public class ProductController{
 							  @RequestParam("originalFileName") MultipartFile file) throws Exception {
 		
 
-		product.setBrandIden(brand);
+	
 		
-		String path = "C:\\Users\\bit\\git\\11.Model2MVCShop(Ajax)\\WebContent\\images\\uploadFiles\\";
+		String path = "C:\\Users\\bit\\git\\11.Refactoring\\11.Model2MVCShop\\WebContent\\images\\uploadFiles\\";
 		String originalFileName = file.getOriginalFilename();
-		
+		System.out.println(originalFileName);
 		File uploadFile = new File(path, originalFileName);
 		file.transferTo(uploadFile);
 				
+		product.setBrandIden(brand);
+		product.setFileName(originalFileName);
+		
 		//Business Logic
 		productService.addProduct(product);
 
