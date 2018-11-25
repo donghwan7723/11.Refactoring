@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PartsMapper">
+ 	
+ 	
+	<resultMap id="partsSelectMap" type="parts">
+		<result property="partId" 				column="part_id" 			jdbcType="NUMERIC"/>
+		<result property="partClass"			column="part_class" 		jdbcType="VARCHAR" />
+		<result property="partName" 			column="part_name" 			jdbcType="VARCHAR" />
+		<result property="price" 				column="price" 			    jdbcType="NUMERIC" />
+		<result property="carBrandId" 			column="brand_id" 		    jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	 <insert 	id="addParts"		parameterType="parts" >                       
+		INSERT INTO parts
+		values(seq_parts_part_id.nextval, #{partClass}, #{partName}, #{price}, #{carBrandId})
+	 </insert>
+ 
+ 	<!-- SQL : SELECT -->
+	 <select	id="getParts"		parameterType="parts" resultMap="partsSelectMap" >                       
+		SELECT
+		part_name
+		FROM parts
+		WHERE brand_id = #{carBrandId} AND part_class = #{partClass}
+	 </select>
+  
+ 
+</mapper>
