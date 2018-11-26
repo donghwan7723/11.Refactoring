@@ -53,39 +53,34 @@ function fncSelect(){
 						header : {
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"	
-						},
+						}, //end of header
+						
 						success : function(JSONData , status){
+							 alert(JSONData.partName);
 							
-							var displayValue = "<option></option>";
-						}
-					}
+						   	while(JSONData != null){
+							
+								var temp = "<option value='"+JSONData.partName+"'>"+JSONData.partName+"</option>";
+								
+								alert(temp);
+							}
+/* 							<option value="ENGINE" >ENGINE</option>
+							<option value="TIRE" >TIRE</option>
+							<option value="WHEEL" >WHEEL</option> */
+						}//end of success
+					
+			});//end of $.ajax
 				
 				
 				
-		}); 
-
-/* 		  $.ajax(
-				  {
-					  url:"/parts/json/getParts/"+brandId+"/"+partClass ,
-					  method:"GET",
-					  dataType: "json",
-					  headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-					  } ,
-					 success : function(JSONData, status){
-							alert(JSONData)
-					 }
-					    */
-				  
-			
+		});//end of selector 
 		
-	
-	});//end of jquery	
+	  });//end of jquery	
 
 }//end of javaScript
-		
-		
+			
+
+
 		
 $(function(){	
 
@@ -109,8 +104,8 @@ $(function(){
 				history.go(-1);
 		
 			});
+ 		
  		}
-
 });//end of jquery 
 	
 

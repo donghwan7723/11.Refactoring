@@ -44,11 +44,15 @@ public class PartsRestController {
 	@RequestMapping(value="json/getParts/{brandId}/{partClass}", method=RequestMethod.GET)
 	public List<Parts> getParts(@PathVariable String brandId, @PathVariable String partClass) throws Exception{ 
 
+
 		Parts parts = new Parts();
+		String carBrand = brandId+"  ";
+	
 		parts.setPartClass(partClass);
-		parts.setCarBrandId(brandId);
-		
+		parts.setCarBrandId(carBrand);
+
 		List<Parts> list = partsService.getParts(parts);
+
 		
 		return list;
 	}

@@ -22,7 +22,7 @@
 	 </insert>
  
  	<!-- SQL : SELECT -->
-	 <select	id="getParts"		parameterType="parts" resultMap="partsSelectMap" >                       
+	 <select	id="getParts"		parameterType="parts"      resultMap="partsSelectMap" >                       
 		SELECT
 		part_name
 		FROM parts

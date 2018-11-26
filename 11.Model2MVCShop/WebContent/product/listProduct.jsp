@@ -44,12 +44,14 @@
 				
 				var prodNo = $(this).data("param");	
 				var tranCode = $(this).data("param1");
-				var menu = '${param.menu}';
+				alert(prodNo);
+				alert(tranCode);
 				
 				
- 				if(menu=='manage'){
+				
+ 				if(${param.menu=='manage'}){
 					self.location = "/product/updateProductView?prodNo="+prodNo+"&menu=manage"
-				}else if(menu=='search'){
+				}else if(${param.menu=='search'}){
 					if(tranCode=='0'){
 						self.location = "/product/getProduct?prodNo="+prodNo+"&menu=search"
 					}
@@ -58,7 +60,7 @@
 			
 			
 			$(".ct_list_pop td:nth-child(11)").bind("click",function(){
-				
+		
 				var prodNo = $(this).data("param2");	
 				var tranCode = $(this).data("param3");
 			
@@ -88,7 +90,7 @@
 </script>
 
 </head>
- <body>
+<%--  <body>
 
 	<jsp:include page="/layout/toolbar.jsp" />
 
@@ -97,9 +99,9 @@
 
 			<h2>썸네일</h2> 
 
-<%-- 			<c:forEach var="product" items="${list}">
+			<c:forEach var="product" items="${list}">
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<div class="col-md-3">
 					
  						<a href="#" class="thumbnail">
 						<img src="../images/uploadFiles/${product.fileName}"> </a> 
@@ -108,22 +110,26 @@
 				</div>
 	
  		</c:forEach>	
- 		 </div>   --%>
+ 		 </div>  
  		
  		 <c:forEach var="product" items="${list}">
 			<ul class="thumbnails">
   				<li class="span1">
- 				   <div class="thumbnail">
- 				     <img src="../images/uploadFiles/${product.fileName}" class="rounded float-right" width="300" height="300">
+ 				   <div class="col-md-9">
+ 				     <img src="../images/uploadFiles/${product.fileName}" class="image-round" width="300" height="300">
+  					</div>
+  					<div class="thumbnail">
+  						원
   					</div>  
   				</li>
  				 못타는건 나도알아
-			</ul>
+
+			
  		</c:forEach>	
+ 		 --%>
  		 
  		 
- 		 
- <%-- <body bgcolor="#ffffff" text="#000000">
+ <body bgcolor="#ffffff" text="#000000">
 
 
  <div style="width:98%; margin-left:10px;">
@@ -232,14 +238,14 @@
 		${product.brandIden.brandName}
 		</td>
 		<td></td>
-		<td align="left" data-param="${product.prodNo}" data-param1="${product.proTranCode}" >
+		<td align="left" data-param="${product.prodNo}" data-param1="${trimTranCode}">
 		<c:if test="${param.menu=='manage'}">
 	     <!--  	<a href = "/product/updateProductView?prodNo=${product.prodNo}&menu=manage">${product.prodName}</a>  -->
 		${product.prodName}
 		</c:if>
 		<c:if test="${param.menu=='search'}">
 			<c:if test="${!(trimTranCode=='0')}">
-			<span>${product.prodName}</span>
+			${product.prodName}
 			</c:if>
 			<c:if test="${trimTranCode=='0'}">
 		 <!--	<a href = "/product/getProduct?prodNo=${product.prodNo}&menu=search">${product.prodName}</a>   -->
@@ -326,7 +332,7 @@
 </table> 
 <!--  페이지 Navigator 끝 -->
 
-</form> --%>
+</form> 
 
 
 </body>

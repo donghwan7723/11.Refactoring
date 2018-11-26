@@ -48,15 +48,13 @@ public class ProductController{
 	public String addProduct (@ModelAttribute("product") Product product, @ModelAttribute("brand") Brand brand,
 							  @RequestParam("originalFileName") MultipartFile file) throws Exception {
 		
-
-	
 		
 		String path = "C:\\Users\\bit\\git\\11.Refactoring\\11.Model2MVCShop\\WebContent\\images\\uploadFiles\\";
 		String originalFileName = file.getOriginalFilename();
 		System.out.println(originalFileName);
 		File uploadFile = new File(path, originalFileName);
 		file.transferTo(uploadFile);
-				
+
 		product.setBrandIden(brand);
 		product.setFileName(originalFileName);
 		
