@@ -17,4 +17,5 @@ public interface PartsDAO {
 		// GET
 		public List<Parts> getParts(Parts parts) throws Exception;
 		
+		public int getPartsPrice(String PartsName) throws Exception;
 }

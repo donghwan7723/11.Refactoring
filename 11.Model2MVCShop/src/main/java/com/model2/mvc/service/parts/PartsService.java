@@ -12,4 +12,6 @@ public interface PartsService {
 	public void addParts(Parts parts) throws Exception;
 
 	public List<Parts> getParts(Parts parts) throws Exception;
+	
+	public int getPartsPrice(String PartsName) throws Exception;
 }

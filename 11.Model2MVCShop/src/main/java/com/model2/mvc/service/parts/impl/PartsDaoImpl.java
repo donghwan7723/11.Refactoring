@@ -40,5 +40,10 @@ public class PartsDaoImpl implements PartsDAO{
 	}
 
 
+	public int getPartsPrice(String partsName) throws Exception {
+		return sqlSession.selectOne("PartsMapper.getPartsPrice", partsName);
+	}
+
+
 
 }

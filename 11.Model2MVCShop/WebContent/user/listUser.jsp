@@ -92,7 +92,7 @@
 									"Content-Type" : "application/json"
 								},
 								success : function(JSONData , status) {
-									alert(JSONData);
+									alert(JSONData.userId);
 									var displayValue = "<h6>"
 																+"아이디 : "+JSONData.userId+"<br/>"
 																+"이  름 : "+JSONData.userName+"<br/>"

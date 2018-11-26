@@ -160,7 +160,7 @@ function fncAddProduct(){
 		  <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" readonly="readonly" id="manuDate" name="manuDate"/>
+		      	<input type="text" class="form-control" readonly="readonly" id="manuDate" name="manuDate"/>
 		      </div>	
 		  </div>
 

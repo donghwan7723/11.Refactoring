@@ -35,15 +35,9 @@
 
 function fncSelect(){
 
-	  $(function(){	
-		
-		
-		$("select[name=partClass]").bind("click", function(){
-			
-				var brandId = $("input:hidden").val();
-				console.log(brandId);
-				var partClass = $(this).val();	
-				console.log(partClass);
+	
+			var brandId = $("input:hidden").val();
+			var partClass = $("select[name=partClass]").val();
 			
 			$.ajax(
 					{
@@ -53,46 +47,79 @@ function fncSelect(){
 						header : {
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"	
-						}, //end of header
 						
-						success : function(JSONData , status){
-							 alert(JSONData.partName);
+						}, //end of header
+		
+						success : function(data , status){
+
+							var temp = "";
+							var display = "";
 							
-						   	while(JSONData != null){
+ 							if(data.length>0){
 							
-								var temp = "<option value='"+JSONData.partName+"'>"+JSONData.partName+"</option>";
+								$.each(data, function(index){
+									temp = "<option value='"+data[index].partName+"'>"+data[index].partName+"</option>";
+									display += temp;
+								});
 								
-								alert(temp);
-							}
-/* 							<option value="ENGINE" >ENGINE</option>
-							<option value="TIRE" >TIRE</option>
-							<option value="WHEEL" >WHEEL</option> */
+									$("select[name=partName]").children("option").not("option:nth-child(1)").remove();
+									$("select[name=partName]").append(display);
+									
+							}else if(data.length==0){
+							
+								var notDisplay = "<option value=''>재고없음 </option>";
+									$("select[name=partName]").children("option").not("option:nth-child(1)").remove();
+									$("select[name=partName]").append(notDisplay);
+							} 
+							
+					
 						}//end of success
 					
 			});//end of $.ajax
-				
-				
-				
-		});//end of selector 
-		
-	  });//end of jquery	
 
 }//end of javaScript
-			
 
+		
+function fncGetPirce(){
+
+			var partName = $("select[name=partName]").val();
+	
+			alert(partName);
+	
+
+			$.ajax(
+					{
+						url : "/parts/json/getParts/"+partName ,
+						method : "GET" ,
+						dataType : "json" ,
+						contentType: "application/x-www-form-urlencoded; charset=MS949",
+						header : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"	
+				
+						}, //end of header
+						success : function(data, status){
+							
+							$(".price").text(data);
+							
+						}//end of success
+				
+					});//end of $.ajax
+		
+}//end of fncGetPrice 
 
 		
 $(function(){	
 
 		
- 		if(${user.role=='admin'}){
+ 		if('${user.role}'=='admin'){
 
 			//확인 button
 			$("button:contains('확인')").on("click", function(){
 				self.location= "/product/listProduct?menu=manage"
 			});
 	
- 		}else if(${user.role=='user'}){
+ 		}else if('${user.role}'=='user'){
 			
 			//구매 button
 			$("button:contains('구매')").on("click", function(){
@@ -106,8 +133,13 @@ $(function(){
 			});
  		
  		}
+ 		
+ 	
+ 			
+ 
+
 });//end of jquery 
-	
+
 
 </script>
 
@@ -167,21 +199,21 @@ $(function(){
 
 		<div class="row">
 		  <div class="col-xs-4 col-md-2 "><strong>가격</strong></div>
- 		  <div class="col-xs-8 col-md-4">${product.price}</div>
+ 		  <div class="col-xs-8 col-md-4 price">${product.price}</div>
 		</div>	    
 	
 		<hr/>
 	
 		<div class="row">
 		  <div class="col-xs-4 col-md-2 "><strong>부품옵션</strong></div>
- 		  <select name="partClass" class="ct_input_g" style="width: 100px; height: 19px" onchange="fncSelect()">
-				<option value="">분류</option>
+ 		  <select name="partClass" class="ct_input_g" style="width: 100px; height: 19px" onchange="fncSelect(this)">
+				<option selected>부품종류</option>
 				<option value="ENGINE" >ENGINE</option>
 				<option value="TIRE" >TIRE</option>
 				<option value="WHEEL" >WHEEL</option>
 		  </select>
 					
-		  <select name="" class="ct_input_g" style="width: 100px; height: 19px" maxLength="10">
+		  <select name="partName" class="ct_input_g" style="width: 100px; height: 19px" onchange="fncGetPirce(this)">
 				<option value="" selected>부품선택</option>
 		  </select>					
 		</div>	    

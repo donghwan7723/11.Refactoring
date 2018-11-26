@@ -1,5 +1,6 @@
 package com.model2.mvc.web.parts;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,15 +47,25 @@ public class PartsRestController {
 
 
 		Parts parts = new Parts();
+		
 		String carBrand = brandId+"  ";
 	
 		parts.setPartClass(partClass);
 		parts.setCarBrandId(carBrand);
 
 		List<Parts> list = partsService.getParts(parts);
-
 		
 		return list;
 	}
+	
+	@RequestMapping(value="json/getParts/{partName}", method=RequestMethod.GET)
+	public int getPartsPirce(@PathVariable String partName) throws Exception{
+		
+		String partNameDecoder = URLDecoder.decode(partName,"UTF-8"); 
+		System.out.println(partNameDecoder);
+		int price = partsService.getPartsPrice(partName);
+		
 
+		return price;
+	}
 }

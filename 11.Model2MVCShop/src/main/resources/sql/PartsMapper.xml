@@ -28,6 +28,14 @@
 		FROM parts
 		WHERE brand_id = #{carBrandId} AND part_class = #{partClass}
 	 </select>
-  
+
+	 <select	id="getPartsPrice"		parameterType="String"      resultType="int" >                       
+		SELECT
+		price
+		FROM parts
+		WHERE part_name = #{value}
+	 </select>  
+
+ 	
  
 </mapper>

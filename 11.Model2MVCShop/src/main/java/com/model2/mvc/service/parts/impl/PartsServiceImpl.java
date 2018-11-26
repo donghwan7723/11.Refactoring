@@ -39,5 +39,9 @@ public class PartsServiceImpl implements PartsService{
 
 	public List<Parts> getParts(Parts parts) throws Exception {
 		return partsDao.getParts(parts);
+	}
+
+	public int getPartsPrice(String partsName) throws Exception {
+		return partsDao.getPartsPrice(partsName);
 	}	
 }
