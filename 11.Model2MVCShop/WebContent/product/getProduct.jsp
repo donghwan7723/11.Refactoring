@@ -43,11 +43,10 @@ function fncSelect(){
 					{
 						url : "/parts/json/getParts/"+brandId+"/"+partClass ,
 						method : "GET" ,
-						dataType : "json" ,
 						header : {
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"	
-						
+					
 						}, //end of header
 		
 						success : function(data , status){
@@ -83,7 +82,8 @@ function fncSelect(){
 function fncGetPirce(){
 
 			var partName = $("select[name=partName]").val();
-	
+		
+			
 			alert(partName);
 	
 
@@ -92,7 +92,6 @@ function fncGetPirce(){
 						url : "/parts/json/getParts/"+partName ,
 						method : "GET" ,
 						dataType : "json" ,
-						contentType: "application/x-www-form-urlencoded; charset=MS949",
 						header : {
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"	
@@ -100,7 +99,12 @@ function fncGetPirce(){
 						}, //end of header
 						success : function(data, status){
 							
-							$(".price").text(data);
+							var productPrice = ${product.price};
+							var partsPrice = data;
+							
+							var totalAmount = productPrice + partsPrice;
+
+							$(".price").text(totalAmount);
 							
 						}//end of success
 				
@@ -116,7 +120,7 @@ $(function(){
 
 			//확인 button
 			$("button:contains('확인')").on("click", function(){
-				self.location= "/product/listProduct?menu=manage"
+				self.location= "/product/listProduct?menu=search"
 			});
 	
  		}else if('${user.role}'=='user'){
@@ -178,7 +182,7 @@ $(function(){
 
 		<div class="row">
 		  <div class="col-xs-4 col-md-2 "><strong>상품이미지</strong></div>
-		  <img src="/images/uploadFiles/${product.fileName}" />
+		  <img src="/images/uploadFiles/${product.fileName}" width="360px;"/>
 		</div>	    
 	
 		<hr/>				
@@ -207,7 +211,7 @@ $(function(){
 		<div class="row">
 		  <div class="col-xs-4 col-md-2 "><strong>부품옵션</strong></div>
  		  <select name="partClass" class="ct_input_g" style="width: 100px; height: 19px" onchange="fncSelect(this)">
-				<option selected>부품종류</option>
+				<option value='' selected>부품종류</option>
 				<option value="ENGINE" >ENGINE</option>
 				<option value="TIRE" >TIRE</option>
 				<option value="WHEEL" >WHEEL</option>
@@ -221,8 +225,8 @@ $(function(){
 		<hr/>
 
 		<div class="row">
-		  <div class="col-xs-4 col-md-2 "><strong>등록일자</strong></div>
- 		  <div class="col-xs-8 col-md-4">${product.regDate}</div>
+		  <div class="col-xs-4 col-md-2 "><strong>제조일자</strong></div>
+ 		  <div class="col-xs-8 col-md-4">${product.manuDate}</div>
 		</div>
 
 		<hr/>

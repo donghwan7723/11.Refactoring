@@ -13,17 +13,28 @@ public class Product {
 	private int prodNo;
 	private Date regDate;
 	private String proTranCode;
-	private int count;			         //재고
+	private int count;//사용 X 			        
 	private Brand brandIden;
+	private Parts partsIden;
+	
 	
 	public Product(){
 	}
 	
 
+	
+	public Parts getPartsIden() {
+		return partsIden;
+	}
+	
+	public void setPartsIden(Parts partsIden) {
+		this.partsIden = partsIden;
+	}
+	
 	public Brand getBrandIden() {
 		return brandIden;
 	}
-
+	
 	public void setBrandIden(Brand brandIden) {
 		this.brandIden = brandIden;
 	}
@@ -83,11 +94,16 @@ public class Product {
 		this.regDate = regDate;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Product [fileName=" + fileName + ", manuDate=" + manuDate + ", price=" + price + ", prodDetail="
 				+ prodDetail + ", prodName=" + prodName + ", prodNo=" + prodNo + ", regDate=" + regDate
-				+ ", proTranCode=" + proTranCode + ", count=" + count + ", Brand=" + brandIden + "]";
+				+ ", proTranCode=" + proTranCode + ", count=" + count + ", brandIden=" + brandIden + ", partsIden="
+				+ partsIden + "]";
 	}
+
+
 
 }

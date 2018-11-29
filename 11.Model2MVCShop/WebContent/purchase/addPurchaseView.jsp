@@ -4,24 +4,35 @@
 
 
 
+<!DOCTYPE html>
+
+<html lang="ko">
 
 
-
-<html>
 <head>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<meta charset="EUC-KR">
 
-<title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="../javascript/calendar.js">
-</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="../javascript/calendar.js"></script>
+
+    <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="/javascript/bootstrap-datepicker.kr.js" charset="euc-kr"></script>
+
 
 <script type="text/javascript">
 
-/* function fncAddPurchase() {
-	 document.addPurchase.submit();
-}*/
 
 	$(function(){
 		
@@ -38,11 +49,102 @@
 	});
 
 
-</script>
-</head>
+		</script>
+	</head>
 
 <body>
 
+	<jsp:include page="/layout/toolbar.jsp" />
+	
+	<br/><br/><br/><br/>
+	
+	<div class="container">
+
+		<div class="page-header">
+	       <h3 class=" text-info">구매정보</h3>
+	    </div>
+	    
+	    <form class="form-horizontal">
+	    
+	    
+		<input type="hidden" name="prodNo" value="${product.prodNo}"/>
+
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>브랜드</strong></div>
+			<div class="col-xs-8 col-md-4">${product.brandIden.brandId}</div>
+		</div>
+
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>상품명</strong></div>
+			<div class="col-xs-8 col-md-4">${product.prodName}}</div>
+		</div>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>부품명</strong></div>
+			<div class="col-xs-8 col-md-4">${product.partIden.partName}</div>
+		</div>		
+
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>가격</strong></div>
+			<div class="col-xs-8 col-md-4">${product.price}</div>
+		</div>
+		
+		<div class="form-group">
+		    <label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label">구매방법</label>
+		    <div class="col-sm-4">
+				<select name="paymentOption" id="paymentOption" class="form-control" >
+					<option value="1" selected >현금구매</option>
+					<option value="2">신용구매</option>
+				</select>
+			</div>
+		  </div>				
+
+		  <div class="form-group">
+		    <label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">구매자이름</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" value="${user.userName}" name="receiverName">
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label">구매자연락처</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" value="${user.phone}" name="receiverPhone">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="divyAddr" class="col-sm-offset-1 col-sm-3 control-label">구매자주소</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" value="${user.addr}" name="divyAddr">
+		    </div>
+		  </div>		  
+		  
+		  <div class="form-group">
+		    <label for="divyRequest" class="col-sm-offset-1 col-sm-3 control-label">구매요청사항</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" name="divyRequest">
+		    </div>
+		  </div>			
+
+	      <div class="form-group">
+		    <label for="divyDate" class="col-sm-offset-1 col-sm-3 control-label">배송희망일자</label>
+		    <div class="col-sm-4">
+		      <div class="input-group date">
+           			 <input type="text" name="divyDate" class="form-control"><span class="input-group-addon" >
+           			 <i class="glyphicon glyphicon-calendar"></i></span>
+           	  </div>
+		      </div>	
+		  </div>
+
+
+
+	  </form>
+	</div>
+  </body>
+</html>
+
+<%-- 
 <form name="addPurchase">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
@@ -249,4 +351,4 @@
 </form>
 
 </body>
-</html>
+</html> --%>

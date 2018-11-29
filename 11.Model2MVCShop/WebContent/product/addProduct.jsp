@@ -20,6 +20,8 @@
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
         }
+        
+        img { width:500px; }
     </style>
     
   
@@ -98,8 +100,7 @@ $(function(){
 
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>상품이미지</strong></div>
-			<div class="col-xs-8 col-md-4">
-				<img src="/images/uploadFiles/${product.fileName}"/>
+			<img src="/images/uploadFiles/${product.fileName}" />
 			</div>
 		</div>
 

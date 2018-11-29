@@ -20,6 +20,15 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script type="text/javascript" src="../javascript/calendar.js"></script>
 
+    <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="/javascript/bootstrap-datepicker.kr.js" charset="euc-kr"></script>
+
+
 	<style>
        body > div.container{
         	border: 3px solid #D6CDB7;
@@ -89,6 +98,16 @@ function fncAddProduct(){
 			$("form").attr("method","POST").attr("action", "/product/listProduct").submit();
 		});
 
+		//제조일자 event
+	    $('.input-group.date').datepicker({
+
+	         calendarWeeks: false,
+	         todayHighlight: true,
+	         autoclose: true,
+	         format: "yyyy/mm/dd",
+	         language: "kr"
+
+	      });
 
 	}); //Jquery function end
 					
@@ -115,7 +134,7 @@ function fncAddProduct(){
 		  <div class="form-group">
 		    <label for="brandId" class="col-sm-offset-1 col-sm-3 control-label">브랜드</label>
 		    <div class="col-sm-4">
-				<select name="brandId" id="brand" class="ct_input_g" style="width: 100px; height: 19px" maxLength="10">
+				<select name="brandId" id="brand" class="form-control" >
 					<option value="" selected>브랜드선택</option>
 					<option value="RAM">람보르기니</option>
 					<option value="BUG">부가티</option>
@@ -158,9 +177,12 @@ function fncAddProduct(){
 		  </div>	
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
+		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
 		    <div class="col-sm-4">
-		      	<input type="text" class="form-control" readonly="readonly" id="manuDate" name="manuDate"/>
+		      <div class="input-group date">
+           			 <input type="text" name="manuDate" class="form-control"><span class="input-group-addon" >
+           			 <i class="glyphicon glyphicon-calendar"></i></span>
+           	  </div>
 		      </div>	
 		  </div>
 

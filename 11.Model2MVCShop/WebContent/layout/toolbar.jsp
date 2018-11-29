@@ -58,6 +58,7 @@
 		                     <ul class="dropdown-menu">
 		                         <li><a href="#">판매상품등록</a></li>
 		                         <li><a href="#">판매상품관리</a></li>
+		                         <li><a href="#">부품등록</a></li>
 		                         <li class="divider"></li>
 		                         <li><a href="#">etc..</a></li>
 		                     </ul>
@@ -140,6 +141,10 @@
 			 	
 			$("a:contains('상 품 검 색')" ).on("click", function(){
 				$(self.location).attr("href","/product/listProduct?menu=search");
+			});
+			
+			$("a:contains('부품등록')").on("click",function(){
+				$(self.location).attr("href", "/parts/addPartsView.jsp");
 			});
 		
 			$("a:contains('최근 본 상품')").on("click", function(){

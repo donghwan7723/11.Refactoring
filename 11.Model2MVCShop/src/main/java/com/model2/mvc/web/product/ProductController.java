@@ -140,14 +140,21 @@ public class ProductController{
 		}
 		
 		@RequestMapping(value="updateProduct", method=RequestMethod.POST)
-		public String updateProduct(@ModelAttribute("product") Product product, @ModelAttribute("brand") Brand brand,
-									@RequestParam("menu") String menu) throws Exception {
+		public String updateProduct(@ModelAttribute("product") Product product, @ModelAttribute("brand") Brand brand,  
+								    @RequestParam("originalFileName") MultipartFile file , @RequestParam("menu") String menu) throws Exception {
 			
-			System.out.println("여기는 productController updateProduct");
+		
+			
+			String path = "C:\\Users\\bit\\git\\11.Refactoring\\11.Model2MVCShop\\WebContent\\images\\uploadFiles\\";
+			
+			String originalFileName = file.getOriginalFilename();
+			
+			File uploadFile = new File(path, originalFileName);
+			file.transferTo(uploadFile);
+			
 			
 			product.setBrandIden(brand);
-			System.out.println("디버깅용"+product);
-			System.out.println("디버깅용"+menu);
+			product.setFileName(originalFileName);
 					
 			productService.updateProduct(product);
 			
