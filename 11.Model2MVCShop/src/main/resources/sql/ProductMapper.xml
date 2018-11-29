@@ -19,26 +19,58 @@
 		<result property="count" 			    column="count" 					jdbcType="NUMERIC" />
 		<result property="brandIden.brandId"    column="brand_Id"				jdbcType="VARCHAR"/>
 		<result property="brandIden.brandName"  column="brand_name"				jdbcType="VARCHAR"/>
+		<result property="partsIden.partName"   column="part_name"				jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
 	 <insert 	id="addProduct"		parameterType="product" >                       
-	 	INSERT  
-		INTO product(prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, brand_id, count) 
-		VALUES	 (seq_product_prod_no.nextval, #{prodName}, #{prodDetail}, TO_CHAR(TO_DATE(#{manuDate}, 'YYYY-MM-DD'), 'YYYYMMDD'), #{price}, 
-					#{fileName}, sysdate, #{brandIden.brandId}, #{count}
-			     )
+	 	INSERT INTO 
+	 		product(prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, brand_id, count) 
+		VALUES	 
+			(seq_product_prod_no.nextval, #{prodName}, #{prodDetail}, TO_CHAR(TO_DATE(#{manuDate}, 'YYYY-MM-DD'), 'YYYYMMDD'), #{price}, 
+				#{fileName}, sysdate, #{brandIden.brandId}, #{count}
+			)
 	 </insert>
   
  	<!-- SQL : SELECT ONE -->
-	 <select 	id="getProduct"	parameterType="int"	resultMap="productSelectMap">
+<!-- 	 <select 	id="getProduct"	parameterType="int"	resultMap="productSelectMap">
 		
 		SELECT 
-		b.brand_name, p.prod_name, p.image_file, p.prod_detail, p.price, p.manufacture_day, p.count, p.reg_date, p.prod_no, p.brand_id
-		FROM product p, brand b
-		WHERE p.brand_id = b.brand_id AND p.prod_no = #{value}
+			b.brand_name, p.prod_name, p.image_file, p.prod_detail, p.price, p.manufacture_day, p.count, p.reg_date, p.prod_no, p.brand_id
+		FROM 
+			product p, brand b
+		WHERE 
+			p.brand_id = b.brand_id AND p.prod_no = #{value}
 
+	 </select> -->
+	 
+	  <select 	id="getProduct"	parameterType="product"	resultMap="productSelectMap">
+		
+		SELECT 
+			b.brand_name, prd.prod_name, prd.image_file, prd.prod_detail, prd.price, prd.manufacture_day, prd.count, prd.reg_date, prd.prod_no, prd.brand_id,
+			p.part_name, p.price
+			
+		FROM 
+			product prd, parts p, brand b
+		WHERE 
+			b.brand_id = p.brand_id AND b.brand_id = prd.brand_id AND prd.prod_no = #{prodNo} 
+		 <if test="partName != null and partName !=''">
+			AND p.part_name = #{partName}
+		</if>
+		
 	 </select>
+	 
+	<!--  <select   id ="getProductJoin" parameterType="product" resultMap="productSelectMap">
+	 
+		SELECT 
+			prd.prod_no, prd.prod_name, b.brand_name, p.part_name, prd.price, p.price 
+	 	FROM 
+	 		product prd, parts p, brand b
+	 	WHERE 
+			b.brand_id = p.brand_id AND b.brand_id = prd.brand_id AND prd.prod_no = #{prodNo} AND p.part_name = #{partName} 
+	 
+	 
+	 </select>-->
 	 
  	 
   	<!--  SQL : UPDATE -->
@@ -49,9 +81,10 @@
 			prod_detail	= #{prodDetail},
 			price = #{price},
 			manufacture_day	= TO_CHAR(TO_DATE(#{manuDate}, 'YYYY-MM-DD'), 'YYYYMMDD'),
+			<!-- manufacture_day	= #{manuDate}, -->
 			brand_id = #{brandIden.brandId},
 			count = #{count},
-			image_file = #{fileName}
+			image_file = #{fileName:VARCHAR}
 	   	</set>
 	   	WHERE prod_no = #{prodNo}
 	 </update>
@@ -78,7 +111,6 @@
 													</if>
 													<if test="searchCondition == 2 and searchKeyword !='' ">
 										 			  AND prd.price LIKE '%'||#{searchKeyword}||'%'
-	
 													</if>
 
 											</if>

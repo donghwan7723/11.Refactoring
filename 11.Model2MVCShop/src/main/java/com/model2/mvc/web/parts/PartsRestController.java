@@ -1,9 +1,12 @@
 package com.model2.mvc.web.parts;
 
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -61,8 +64,11 @@ public class PartsRestController {
 	@RequestMapping(value="json/getParts/{partName}", method=RequestMethod.GET)
 	public int getPartsPirce(@PathVariable String partName) throws Exception{
 		
-		String partNameDecoder = URLDecoder.decode(partName,"UTF-8"); 
-		System.out.println(partNameDecoder);
+	
+		System.out.println(partName);
+
+		
+		
 		int price = partsService.getPartsPrice(partName);
 		
 
