@@ -9,7 +9,7 @@ DROP SEQUENCE seq_transaction_tran_no;
 
 CREATE SEQUENCE seq_product_prod_no		 	INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_transaction_tran_no	INCREMENT BY 1 START WITH 10000;
-
+CREATE SEQUENCE seq_parts_part_id   INCREMENT BY 1 START WITH 10000;
 
 CREATE TABLE users ( 
 	user_id 			VARCHAR2(20)	NOT NULL,
@@ -53,9 +53,43 @@ CREATE TABLE transaction (
 
 CREATE TABLE brand(
 brand_id     CHAR(5)    NOT NULL  CONSTRAINT   brand_brand_id_pk PRIMARY KEY,
-brand_name    VARCHAR2(15)   NOT NULL,
-part_name	  VARCHAR2(20)
+brand_name    VARCHAR2(15)   NOT NULL
 );
+
+
+CREATE TABLE PARTS(
+part_id            NUMBER          NOT NULL   CONSTRAINT parts_part_id_pk PRIMARY KEY,
+part_class	        VARCHAR2(20)  NOT NULL,
+part_name       VARCHAR2(20)  NOT NULL,
+price	        NUMBER          NOT NULL,
+brand_id	        CHAR(5)          NOT NULL REFERENCES  brand(brand_id)
+); 
+
+
+
+ALTER TABLE product 
+ADD CONSTRAINT product_brand_id_fk
+FOREIGN KEY(brand_id) REFERENCES brand(brand_id);
+
+
+INSERT INTO parts
+values(seq_parts_part_id.nextval, 'ENGINE', 'V12엔진', 8000, 'RAM');
+
+INSERT INTO parts
+values(seq_parts_part_id.nextval, 'ENGINE', 'V8엔진', 7000, 'RAM');
+
+INSERT INTO parts
+values(seq_parts_part_id.nextval, 'ENGINE', 'V6엔진', 6000, 'RAM');
+
+INSERT INTO parts
+values(seq_parts_part_id.nextval, 'WHEEL', '18inch', 3000, 'POR');
+
+INSERT INTO parts
+values(seq_parts_part_id.nextval, 'WHEEL', '17inch', 3000, 'POR');
+
+INSERT INTO parts
+values(seq_parts_part_id.nextval, 'TIRE', 'WINTERTIRE', 1000, 'HYU');
+
 
 INSERT INTO brand
 values('RAM', '람보르기니');

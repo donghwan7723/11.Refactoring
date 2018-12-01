@@ -38,14 +38,17 @@
 	$(function(){
 		
 		//구매수정 event
-		if('${tranCode}'=='2  '){
-			alert("상품이 배송중입니다. 수정이 불가합니다.");
-	
-		}else{
-			$(".btn:contains('수정')").bind("click", function(){
-				self.location = "/purchase/updatePurchase?tranNo=${purchase.tranNo}"
-			});
-		}
+
+		$(".btn:contains('수정')").bind("click", function(){
+			if('${purchase.tranCode}'=='2  '){
+				alert("상품이 배송중입니다. 수정이 불가합니다.");
+			}else if('${purchase.tranCode}'=='3  '){
+				alert("배송완료입니다. 수정이 불가합니다.");
+			}else{
+			self.location = "/purchase/updatePurchase?tranNo=${purchase.tranNo}"
+			}
+		});
+		
 		
 		//확인 event
 		$(".btn:contains('확인')").bind("click", function(){
@@ -68,11 +71,11 @@
 	       <h3 class=" text-info">구매상세조회</h3>
 	    </div>
 
-		<div class="row">
+<%-- 		<div class="row">
 		  <div class="col-xs-4 col-md-2 "><strong>구매상품</strong></div>
 		  <div class="col-xs-8 col-md-4">${purchase.purchaseProd.prodName}</div>
 		</div>	    
-	
+	 --%>
 		<hr/>
 		
 		<div class="row">

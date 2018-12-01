@@ -97,7 +97,7 @@ public class PurchaseController {
 		
 		purchase = purchaseService.getPurchase(tranNo);
 		
-		String viewName = "/purchase/updatePurchaseView.jsp";
+		String viewName = "/purchase/getPurchase.jsp";
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName(viewName);

@@ -61,8 +61,8 @@ function fncGetList(currentPage) {
 		});
 		
 		//물건도착  Event
-		$(".ct_list_pop td:nth-child(11)").bind("click", function(){
-			var tranNo = $(this).data("param2");
+		$("td:nth-child(6)").bind("click", function(){
+			var tranNo = $(this).data("param1");
 			self.location = "/purchase/updateTranCode?tranNo="+tranNo+"&tranCode=3"
 		});
 		
@@ -132,12 +132,11 @@ function fncGetList(currentPage) {
 					현재 배송중입니다.  			
 				</c:if>
 				<c:if test="${trimTranCode=='3'}">
-					현재 배송완료욉니다.
+					현재 배송완료입니다.
 				</c:if>
-			  <td align="left">    
+			  <td align="left" data-param1="${purchase.tranNo}">    
 				<c:if test="${trimTranCode=='2'}">
-				<a href="/purchase/updateTranCode?tranNo=${purchase.tranNo}&tranCode=3">물건도착</a>	
-					물건도착
+				물건도착
 				</c:if>
 	
 	
