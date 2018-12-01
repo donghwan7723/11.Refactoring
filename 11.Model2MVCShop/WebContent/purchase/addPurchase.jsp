@@ -5,70 +5,101 @@
 <% Purchase purchase = (Purchase)request.getAttribute("purchasevo"); %>
 <% System.out.println("여기부터는 addPurchaseView.jsp 시작점"); %>
 	 													--%>
-<html>
+
+<!DOCTYPE html>
+
+<html lang="ko">
+	
 <head>
-<title>Insert title here</title>
+	<meta charset="EUC-KR">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
+	<style>
+       body > div.container{
+        	border: 3px solid #D6CDB7;
+            margin-top: 10px;
+        }
+        
+        img { width:500px; }
+    </style>
+    
+ </head> 
+ 
+ <body>
+ 
+ 	<jsp:include page="/layout/toolbar.jsp" />
+	
+   	<br/><br/><br/><br/>
 
+  	<div class="container">
+	
+		<div class="page-header">
+	       <h3 class=" text-info">다음과 같이 구매가 되었어요^o^</h3>
+	    </div>
+	    
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>구매자아이디</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.buyer.userId}</div>
+		</div>			    
+	    
+	    <hr/>
+	    
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>구매방법</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.paymentOption=='1' ? '현금구매' : '신용구매'}</div>
+		</div>			    
+	    
+	    <hr/>
 
-</script>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>구매자이름</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.receiverName}</div>
+		</div>			    
+	    
+	    <hr/>	    
 
-</head>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>구매자연락처</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.receiverPhone}</div>
+		</div>			    
+	    
+	    <hr/>
 
-<body>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>구매자주소</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.divyAddr}</div>
+		</div>			    
+	    
+	    <hr/>	
 
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>구매요청사항</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.divyRequest}</div>
+		</div>			    
+	    
+	    <hr/>	
 
-다음과 같이 구매가 되었습니다.
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>구매자주소</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.divyAddr}</div>
+		</div>			    
+	    
+	    <hr/>	
 
-<table border=1>
-	<tr>
-		<td>배송번호</td>
-		<td>${purchase.tranNo}</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>구매자아이디</td>
-		<td>${purchase.buyer.userId}</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>구매방법</td>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>배송희망일자</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.divyDate}</div>
+		</div>			    
+	    
+	    <hr/>	
 
-		<td>${purchase.paymentOption=='1' ? '현금구매' : '신용구매'}</td>
-		<td></td>
-		
-	</tr>
-	<tr>
-		<td>구매자이름</td>
-		<td>${purchase.receiverName}</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>구매자연락처</td>
-		<td>${purchase.receiverPhone}</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>구매자주소</td>
-		<td>${purchase.divyAddr}</td>
-		<td></td>
-	</tr>
-		<tr>
-		<td>구매요청사항</td>
-		<td>${purchase.divyRequest}</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>배송희망일자</td>
-		<td>${purchase.divyDate}</td>
-		<td></td>
-	</tr>
-</table>
-</form>
+	</div>
 
 </body>
 </html>

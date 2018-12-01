@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Brand;
+import com.model2.mvc.service.domain.Parts;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
 
@@ -162,12 +164,7 @@ public class ProductController{
 			return "redirect:/product/getProduct?prodNo="+product.getProdNo()+"&menu="+menu;
 		}
 		
-		@RequestMapping(value="inventoryManage", method=RequestMethod.GET)
-		public void inventoryManage(@RequestParam int count) throws Exception{
-			
+
 		
-		}
-
-
 
 }

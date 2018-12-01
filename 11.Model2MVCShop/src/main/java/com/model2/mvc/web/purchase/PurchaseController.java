@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
+import com.model2.mvc.service.domain.Parts;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.domain.User;
@@ -46,9 +47,18 @@ public class PurchaseController {
 		int pageSize;
 	
 	@RequestMapping(value = "addPurchase", method=RequestMethod.GET)
-	public ModelAndView addPurchase(@RequestParam("prod_no") int prodNo) throws Exception{
+	public ModelAndView addPurchase(@RequestParam("prodNo") int prodNo, @RequestParam("partName") String partName) throws Exception{
 		
-		Product product = productService.getProduct(prodNo);
+		Parts parts = new Parts();
+		parts.setPartName(partName);
+		Product product = new Product();
+		
+		product.setPartsIden(parts);
+		product.setProdNo(prodNo);
+		
+		System.out.println("addPurchase 확인용 : "+product );
+		
+		product = productService.getProductJoin(product);
 		
 		String viewName = "/purchase/addPurchaseView.jsp";
 		
@@ -64,23 +74,18 @@ public class PurchaseController {
 
 		User user = (User)session.getAttribute("user");
 		String tranCode = "1";
-
-		System.out.println("addPurchase 디버깅확인 :"+product);
-
 		
 		purchase.setPurchaseProd(product);
 		purchase.setBuyer(user);
 		purchase.setTranCode(tranCode);
 		
-		
-		System.out.println(purchase);
 		purchaseService.addPurchase(purchase);
 
 		String viewName = "/purchase/addPurchase.jsp";
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName(viewName);
-		modelAndView.addObject("product", product);
+		modelAndView.addObject("purchase", purchase);
 		
 		return modelAndView;
 	}

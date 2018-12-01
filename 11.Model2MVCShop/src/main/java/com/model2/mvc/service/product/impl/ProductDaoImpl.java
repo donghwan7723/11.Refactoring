@@ -40,7 +40,6 @@ public class ProductDaoImpl implements ProductDAO{
 		return sqlSession.selectOne("ProductMapper.getProduct",prodNo);
 	}
 
-	
 	public List<Product> getProductList(Search search) throws Exception {
 		return sqlSession.selectList("ProductMapper.getProductList", search);
 	}
@@ -59,6 +58,11 @@ public class ProductDaoImpl implements ProductDAO{
 	
 	public void inventoryManage(int count) throws Exception {
 		sqlSession.update("ProductMapper.updateCount", count);
+	}
+
+
+	public Product getProductJoin(Product product) throws Exception {
+		return sqlSession.selectOne("ProductMapper.getProductJoin", product);
 	}
 
 

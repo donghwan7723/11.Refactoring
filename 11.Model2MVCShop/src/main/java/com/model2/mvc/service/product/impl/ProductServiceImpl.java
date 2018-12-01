@@ -67,6 +67,10 @@ public class ProductServiceImpl implements ProductService{
 		
 	}
 
+	public Product getProductJoin(Product product) throws Exception {
+		return productDao.getProductJoin(product);
+	}
+
 
 
 

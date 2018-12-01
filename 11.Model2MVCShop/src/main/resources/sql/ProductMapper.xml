@@ -33,7 +33,7 @@
 	 </insert>
   
  	<!-- SQL : SELECT ONE -->
-<!-- 	 <select 	id="getProduct"	parameterType="int"	resultMap="productSelectMap">
+	 <select 	id="getProduct"	parameterType="int"	resultMap="productSelectMap">
 		
 		SELECT 
 			b.brand_name, p.prod_name, p.image_file, p.prod_detail, p.price, p.manufacture_day, p.count, p.reg_date, p.prod_no, p.brand_id
@@ -42,35 +42,26 @@
 		WHERE 
 			p.brand_id = b.brand_id AND p.prod_no = #{value}
 
-	 </select> -->
+	 </select> 
 	 
-	  <select 	id="getProduct"	parameterType="product"	resultMap="productSelectMap">
-		
-		SELECT 
-			b.brand_name, prd.prod_name, prd.image_file, prd.prod_detail, prd.price, prd.manufacture_day, prd.count, prd.reg_date, prd.prod_no, prd.brand_id,
-			p.part_name, p.price
-			
+	 
+ 	 <select   id ="getProductJoin" parameterType="product" resultMap="productSelectMap">
+	 
+		SELECT
+			prd.prod_no, prd.prod_name, vt.brand_name, vt.part_name, SUM(vt.price)+SUM(prd.price) price, vt.brand_name
 		FROM 
-			product prd, parts p, brand b
-		WHERE 
-			b.brand_id = p.brand_id AND b.brand_id = prd.brand_id AND prd.prod_no = #{prodNo} 
-		 <if test="partName != null and partName !=''">
-			AND p.part_name = #{partName}
-		</if>
-		
-	 </select>
+			product prd, (SELECT 
+		  				   	b.brand_id, p.price, p.part_name, b.brand_name 
+	              		  FROM 
+	              			brand b, parts p 
+	              		  WHERE 
+	              			b.brand_id = p.brand_id AND p.part_name = #{partsIden.partName})vt
+	   WHERE 
+		   vt.brand_id = prd.brand_id AND prd.prod_no = #{prodNo}
+	   GROUP BY 
+		   prd.prod_no, prd.prod_name, prd.brand_id, vt.brand_name, vt.price, vt.part_name
 	 
-	<!--  <select   id ="getProductJoin" parameterType="product" resultMap="productSelectMap">
-	 
-		SELECT 
-			prd.prod_no, prd.prod_name, b.brand_name, p.part_name, prd.price, p.price 
-	 	FROM 
-	 		product prd, parts p, brand b
-	 	WHERE 
-			b.brand_id = p.brand_id AND b.brand_id = prd.brand_id AND prd.prod_no = #{prodNo} AND p.part_name = #{partName} 
-	 
-	 
-	 </select>-->
+	 </select> 
 	 
  	 
   	<!--  SQL : UPDATE -->

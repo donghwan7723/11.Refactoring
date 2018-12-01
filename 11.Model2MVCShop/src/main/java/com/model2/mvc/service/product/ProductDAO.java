@@ -17,6 +17,8 @@ public interface ProductDAO {
 		// SELECT ONE
 		public Product getProduct(int prodNo) throws Exception ;
 
+		public Product getProductJoin(Product product) throws Exception;
+
 		// SELECT LIST
 		public List<Product> getProductList(Search search) throws Exception ;
 

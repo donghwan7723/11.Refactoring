@@ -51,6 +51,36 @@ CREATE TABLE transaction (
 	PRIMARY KEY(tran_no)
 );
 
+CREATE TABLE brand(
+brand_id     CHAR(5)    NOT NULL  CONSTRAINT   brand_brand_id_pk PRIMARY KEY,
+brand_name    VARCHAR2(15)   NOT NULL,
+part_name	  VARCHAR2(20)
+);
+
+INSERT INTO brand
+values('RAM', '람보르기니');
+
+INSERT INTO brand
+values('POR', '포르쉐');
+
+INSERT INTO brand
+values('BUG', '부가티');
+
+INSERT INTO brand
+values('AST', '애스턴마틴');
+
+INSERT INTO brand
+values('JU', '재규어');
+
+INSERT INTO brand
+values('MAR', '마세라티');
+
+INSERT INTO brand
+values('KIA', '기아');
+
+INSERT INTO brand
+values('HYU', '현대');
+
 
 INSERT 
 INTO users ( user_id, user_name, password, role, ssn, cell_phone, addr, email, reg_date ) 

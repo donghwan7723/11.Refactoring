@@ -42,14 +42,14 @@ function fncSelect(){
 			$.ajax(
 					{
 						url : "/parts/json/getParts/"+brandId+"/"+partClass ,
-						method : "GET" ,
+						method : "GET",		
 						header : {
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"	
 					
 						}, //end of header
 		
-						success : function(data , status){
+						success : function(data, status){
 
 							var temp = "";
 							var display = "";
@@ -84,14 +84,10 @@ function fncGetPirce(){
 			var partName = $("select[name=partName]").val();
 		
 			
-			alert(partName);
-	
-
 			$.ajax(
 					{
 						url : "/parts/json/getParts/"+partName ,
 						method : "GET" ,
-						dataType : "json" ,
 						header : {
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"	
@@ -125,9 +121,13 @@ $(function(){
 	
  		}else if('${user.role}'=='user'){
 			
-			//구매 button
+	
+ 			
+ 		
+ 			//구매 button
 			$("button:contains('구매')").on("click", function(){
-				self.location= "/purchase/addPurchase?prod_no=${product.prodNo}"
+				var partName = $("select[name=partName]").val();
+				self.location= "/purchase/addPurchase?prodNo=${product.prodNo}&partName="+partName
 			}); 
 	
 			//이전 button
@@ -162,7 +162,7 @@ $(function(){
 	    </div>
 	    
 		<div class="row">
-		  <input type="hidden" name="brandId" value="${product.brandIden.brandId}"/>
+		  <input type="hidden" name="brandId" value="${product.brandIden.brandId}"/> 
 		</div>	    
 	
 		
@@ -175,7 +175,7 @@ $(function(){
 		
 		<div class="row">
 		  <div class="col-xs-4 col-md-2 "><strong>상품명</strong></div>
-		  <div class="col-xs-8 col-md-4">${product.prodName}</div>
+		  <div class="col-xs-8 col-md-4" >${product.prodName}</div>
 		</div>	    
 	
 		<hr/>					
@@ -189,18 +189,11 @@ $(function(){
 
 		<div class="row">
 		  <div class="col-xs-4 col-md-2 "><strong>상품상세정보</strong></div>
- 		  <div class="col-xs-8 col-md-4">${product.prodDetail}</div>
+ 		  <div class="col-xs-8 col-md-4" >${product.prodDetail}</div>
 		</div>	    
 	
 		<hr/>				
 		
-		<div class="row">
-		  <div class="col-xs-4 col-md-2 "><strong>제조일자</strong></div>
- 		  <div class="col-xs-8 col-md-4">${product.manuDate}</div>
-		</div>	    
-	
-		<hr/>		
-
 		<div class="row">
 		  <div class="col-xs-4 col-md-2 "><strong>가격</strong></div>
  		  <div class="col-xs-8 col-md-4 price">${product.price}</div>
@@ -217,8 +210,8 @@ $(function(){
 				<option value="WHEEL" >WHEEL</option>
 		  </select>
 					
-		  <select name="partName" class="ct_input_g" style="width: 100px; height: 19px" onchange="fncGetPirce(this)">
-				<option value="" selected>부품선택</option>
+		  <select name="partName"  class="ct_input_g" style="width: 100px; height: 19px" onchange="fncGetPirce(this)">
+				<option value="" >부품선택</option>
 		  </select>					
 		</div>	    
 	

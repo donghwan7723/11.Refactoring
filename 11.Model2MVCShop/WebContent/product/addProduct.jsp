@@ -55,7 +55,6 @@ $(function(){
 	       <h3 class=" text-info">상품등록완료</h3>
 	    </div>
 
-
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>브랜드</strong></div>
 			<div class="col-xs-8 col-md-4">${product.brandIden.brandId}</div>
@@ -101,8 +100,8 @@ $(function(){
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>상품이미지</strong></div>
 			<img src="/images/uploadFiles/${product.fileName}" />
-			</div>
 		</div>
+		
 
 		<hr/>
 
@@ -112,7 +111,9 @@ $(function(){
 	  			<button type="button" class="btn btn-primary">추가등록</button>
 	  		</div>
 		</div>
-	</div>
+	
+	</div>	
+
 </body>
 
 </html>
